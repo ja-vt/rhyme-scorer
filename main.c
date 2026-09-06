@@ -94,9 +94,7 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event *event){
 
       if(event->key.scancode == SDL_SCANCODE_ESCAPE ){
         count_all(&yes);
-        float L = (float) yes.letters / yes.words * 100;
-        float S = (float) yes.sentence / yes.words * 100;
-        int grade = round(0.0588 * L - 0.296 * S - 15.8);
+        int grade = formulate(&yes);
         snprintf(yes.text, sizeof(yes.text), "%d", grade);
 
 
@@ -115,14 +113,6 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event *event){
   }
   return SDL_APP_CONTINUE;
 }
-
-
-
-
-
-
-
-
 
 void SDL_AppQuit(void *appstate, SDL_AppResult result){
   App *app = appstate;
