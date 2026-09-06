@@ -10,6 +10,7 @@ typedef struct {
   int cap;
 }list;
 
+
 void make_list (list *list){
   list->size=0;
   list->cap=1;
@@ -44,5 +45,12 @@ void remove_from_list (list *list, int i ){
 
   list->size--;
 }
+
+typedef struct{
+  int letters;
+  int words;
+  int sentence;
+  char text[50];
+}all;
 
 
