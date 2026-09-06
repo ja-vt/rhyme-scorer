@@ -21,36 +21,6 @@ TTF_Text *text;
 TTF_Font *font;
 }App;
 
-typedef struct{
-  int letters;
-  int words;
-  int sentence;
-  char text[50];
-}all;
-
-all yes;
-
-void count_all(all *all){
-  all->letters = 0;
-  all->words   = 0;
-  all->sentence = 0;
-
-  for(int i =0, len = strlen(all->text);i<len; i++){
-    if(isalpha(all->text[i])){
-      all->letters++;
-
-    }
-
-    if (all->text[i] == ' '){
-      all->words++;
-    }
-
-    if (all->text[i] == '.' || all->text[i] == '?'){
-      all->sentence++;
-    }
-  }
-}
-
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]){
  
   App *app=SDL_malloc(sizeof(App));
