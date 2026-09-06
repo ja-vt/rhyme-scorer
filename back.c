@@ -78,3 +78,9 @@ void count_all(all *all){
   }
 }
 
+int formulate (all *all){
+   float L = (float) all->letters / yes->words * 100;
+   float S = (float) yes->sentence / yes->words * 100;
+   int grade = round(0.0588 * L - 0.296 * S - 15.8);
+   return grade;
+}
