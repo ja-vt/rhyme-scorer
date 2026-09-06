@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#include "back.c"
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL.h>
 #include <SDL3_ttf/SDL_ttf.h>
