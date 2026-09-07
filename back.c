@@ -6,7 +6,8 @@
 
 typedef struct {
   char words[30];
-  char phenome;
+  char phenome[20][10];
+  int phenome_count;
 }word;
 
 typedef struct {
@@ -15,6 +16,7 @@ typedef struct {
   int cap;
 }list;
 
+word dict[133000];
 
 void make_list (list *list){
   list->size=0;
@@ -85,11 +87,26 @@ int formulate (all *all){
    int grade = round(0.0588 * L - 0.296 * S - 15.8);
    return grade;
 }
-
-char parse_dict(){
+void parse_dict(word dict[]){
   FILE *file = fopen("cmudict.dict", "r");
-  char dict[1024] = fgets(line, sizeof(line), file);
+
+  for(int i = 0; i < 5; i++ ){
+
+    fscanf(file,"%s", dict[i].words );
+    dict[i].phenome_count=0;
+    char peek = 0;
+    while(peek !='\n'){
+
+      fscanf(file,"%s", dict[i].phenome[dict[i].phenome_count]);
+      dict[i].phenome_count++;
+      peek=fgetc(file);
+      if(peek=='\n')break;
+      ungetc(peek, file);
+
+    }
+
+  }
   fclose(file);
-  return dict;
 }
+
 

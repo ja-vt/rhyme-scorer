@@ -45,7 +45,9 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]){
 
   TTF_SetTextWrapWidth(app->text, 0);
 
-  char dict[1024] = parse_dict();
+  
+  parse_dict(dict);
+  
 
   return SDL_APP_CONTINUE;
 }
@@ -61,7 +63,8 @@ SDL_AppResult SDL_AppIterate(void *appstate){
 
   int x = (winW - textW)/2;
   int y = (winH - textH)/2;
-
+ 
+  printf("%s",dict[2].words);
 
 
   SDL_RenderClear(app->renderer); 
