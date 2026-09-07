@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct {
   char words[30];
@@ -37,7 +38,7 @@ void add_list (list *list, word item)
 void print_list (list *list){
 
   for( int i = 0;  i < list->size;  i++ )
-    printf("%d. %s", i+1, list->data[i].sentance);
+    printf("%d. %s", i+1, list->data[i].words);
 }
 
 void remove_from_list (list *list, int i ){
@@ -79,8 +80,16 @@ void count_all(all *all){
 }
 
 int formulate (all *all){
-   float L = (float) all->letters / yes->words * 100;
-   float S = (float) yes->sentence / yes->words * 100;
+   float L = (float) all->letters / all->words * 100;
+   float S = (float) all->sentence / all->words * 100;
    int grade = round(0.0588 * L - 0.296 * S - 15.8);
    return grade;
 }
+
+char parse_dict(){
+  FILE *file = fopen("cmudict.dict", "r");
+  char dict[1024] = fgets(line, sizeof(line), file);
+  fclose(file);
+  return dict;
+}
+

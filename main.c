@@ -12,7 +12,7 @@
 
 #define WIDTH 600
 #define HEIGHT 400
-
+all yes;
 typedef struct{
 SDL_Window *window;
 SDL_Renderer *renderer;
@@ -45,6 +45,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]){
 
   TTF_SetTextWrapWidth(app->text, 0);
 
+  char dict[1024] = parse_dict();
 
   return SDL_APP_CONTINUE;
 }
