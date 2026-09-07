@@ -1,1 +1,3 @@
 # rhyme-scorer
+
+School project
