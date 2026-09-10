@@ -10,9 +10,14 @@
 #include <SDL3_ttf/SDL_ttf.h>
 
 
-#define WIDTH 600
-#define HEIGHT 400
-all yes;
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 400
+// #define CONTENT_HEIGHT 2000  
+// #define SCROLL_SPEED 15.0f 
+
+content yes;
+// float offsetY = 0.0f; 
+
 typedef struct{
 SDL_Window *window;
 SDL_Renderer *renderer;
@@ -31,9 +36,9 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[]){
   TTF_Init();
 
  
-  SDL_CreateWindowAndRenderer("SDL Framebuffer", WIDTH, HEIGHT,SDL_WINDOW_RESIZABLE,&app->window, &app->renderer );
+  SDL_CreateWindowAndRenderer("SDL Framebuffer", WINDOW_WIDTH, WINDOW_HEIGHT,SDL_WINDOW_RESIZABLE,&app->window, &app->renderer );
 
-  app->texture=SDL_CreateTexture(app->renderer, SDL_PIXELFORMAT_XRGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
+  app->texture=SDL_CreateTexture(app->renderer, SDL_PIXELFORMAT_XRGB8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 
   app->engine = TTF_CreateRendererTextEngine(app->renderer);
 
@@ -63,9 +68,6 @@ SDL_AppResult SDL_AppIterate(void *appstate){
 
   int x = (winW - textW)/2;
   int y = (winH - textH)/2;
- 
-  printf("%s",dict[2].words);
-
 
   SDL_RenderClear(app->renderer); 
 
@@ -98,20 +100,38 @@ SDL_AppResult SDL_AppEvent(void* appstate, SDL_Event *event){
 
       if(event->key.scancode == SDL_SCANCODE_ESCAPE ){
         count_all(&yes);
-        int grade = formulate(&yes);
-        snprintf(yes.text, sizeof(yes.text), "%d", grade);
+        // int grade = formulate(&yes);
+        // snprintf(yes.text, sizeof(yes.text), "%d", grade);
 
-
+        
+        convert(dict, temp, &yes);
+        calculate(temp, key, &yes);
+        float score =grade(key,&yes);
+        
+        snprintf(yes.text, sizeof(yes.text), "%f", score);
         TTF_SetTextString(app->text, yes.text, 0);
+
+
+
 
 
       }
 
       break;
 
+
+
     case SDL_EVENT_QUIT:
       return SDL_APP_SUCCESS;
       break;
+
+    // case SDL_EVENT_MOUSE_WHEEL:
+    //   offsetY -= event->wheel.y * SCROLL_SPEED;
+    //   if (offsetY < 0) offsetY = 0;
+    //   if (offsetY > CONTENT_HEIGHT - WINDOW_HEIGHT) 
+    //     offsetY = CONTENT_HEIGHT - WINDOW_HEIGHT;
+    //   break;
+
 
 
   }
