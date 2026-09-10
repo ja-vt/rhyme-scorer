@@ -8,7 +8,6 @@ typedef struct {
   char words[30];
   char phenome[20][30];
   int phenome_count;
-  int match;
 }dictionary;
 
 // typedef struct {
@@ -133,7 +132,7 @@ printf("\n");
   
 
   for(int x=0; x<yes->words; x++){
-    printf("Searching for: '%s'\n", yes->individual[x]);  // ✅ What are we searching for?
+    printf("Searching for: '%s'\n", yes->individual[x]);  
     for(int z=0;z<135166; z++){
       if(strcmp(dict[z].words, yes->individual[x])==0){
         word[x]=dict[z];
