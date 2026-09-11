@@ -174,11 +174,11 @@ float grade(dictionary key[], content *yes){
 
   for(int i = 0; i < yes->words; i++){
     for(int x = 0; x < yes->words; x++){
-      if(i == x) continue;
+      //if(i == x) continue;
       for(int v = 1; v <= key[i].phenome_count && v <= key[x].phenome_count; v++){
         if(strcmp(key[i].phenome[v], key[x].phenome[v]) == 0){
           matches[i]++;
-          total++;
+          break;
         }
       }
     }
@@ -194,7 +194,7 @@ float grade(dictionary key[], content *yes){
   }
 
 
-  float score = (float)total / yes->words;
+  float score = (float)matches[best]*100/ yes->words;
 
     printf("%s has the most matches (%d)\n", key[best].words, matches[best]);
   printf("rhyme score: %.2f\n", score);
